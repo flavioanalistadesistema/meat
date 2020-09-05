@@ -1,0 +1,30 @@
+<!-- INíCIO do CONTEÚDO -->
+<section class="content-header">
+  <h1>
+    Todos os Restaurantes
+  </h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div *ngFor="let restaurant of restaurants" class="col-sm-6 col-xs-12">
+      <a href="#">
+        <div class="place-info-box">
+          <span class="place-info-box-icon"><img [src]="restaurant.imagePath" /></span>
+
+          <div class="place-info-box-content">
+            <span class="place-info-box-text">{{restaurant.name}}</span>
+            <span class="place-info-box-star"><i class="fa fa-star"></i>{{restaurant.rating}}</span>
+            <span class="place-info-box-detail">{{restaurant.category}}</span>
+            <span class="place-info-box-detail">{{restaurant.deliveryEstimate}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </a>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+</section>
+
+<!-- FIM  do CONTEÚDO -->
