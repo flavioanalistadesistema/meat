@@ -8,7 +8,10 @@
   <!-- /.box-header -->
   <div class="box-body">
     <div class="table-responsive">
-        <table class="table">
+      <div *ngIf="!allAmount().legth">
+        <p class="text-center">Nenhum item em seu carrinho</p>
+      </div>
+        <table class="table" *ngIf="allAmount().legth">
           <tbody>
           <tr>
             <th style="width:60%">Cerveja:</th>
@@ -21,20 +24,16 @@
 
             <td class="text-right">R$ 22,00</td>
           </tr>
-          <tr>
-            <th>Frete:</th>
-
-            <td class="text-right">R$ 8,00</td>
-          </tr>
+          
           <tr>
             <th>Total:</th>
 
-            <td class="text-right">R$ 80,90</td>
+            <td class="text-right">{{allAmount() | currency: 'BRL': true}}</td>
           </tr>
         </tbody></table>
       </div>
   </div>
-  <div class="box-footer">
+  <div class="box-footer" *ngIf="allAmount().legth">
     <div class="pull-right">
       <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Limpar</button>
       <a href="order.html" class="btn btn-success"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
