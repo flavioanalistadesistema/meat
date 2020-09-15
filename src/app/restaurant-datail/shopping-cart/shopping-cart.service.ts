@@ -1,16 +1,13 @@
-import { CartItem } from "./cart-item.model";
-import { MenuItem } from "./../menu-item/menu-item.model"
+import { MenuItem } from './../menu-item/menu-item.model'
+import { CartItem } from './sopping-cart.model'
 
 export class ShoppingCartService {
 
-    items: CartItem[] = [];
+    items: CartItem[] = []
 
-    constructor() { }
-    
-
-    clear() {
-        this.items = [];
-     }
+    clear() { 
+        this.items = []
+    }
     
     addItem(item: MenuItem) {
         let foundItem = this.items.find((mItem) => mItem.menuItem.id === item.id)
@@ -22,13 +19,12 @@ export class ShoppingCartService {
      }
     
     removeItem(item: CartItem) {
-        this.items.splice(this.items.indexOf(item), 0)
+        this.items.splice(this.items.indexOf(item), 1)
      }
 
-    AllAmount(): number {
+    allAmount(): number{
         return this.items
-            .map((item) => item.value())
-            .reduce((prev, value) => prev + value, 0)
-     }
-    
+            .map(item => item.value())
+            .reduce((prev, value)=> prev + value, 0)
+    }
 }
