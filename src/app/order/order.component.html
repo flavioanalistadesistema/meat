@@ -20,34 +20,28 @@
           <p class="lead">Endereço de Entrega:</p>
         </div>
         <div class="col-sm-6 col-xs-12">
-          <div class="form-group" 
-          [class.has-success]="iptAddress.valid && (iptAddress.dirty || iptAddress.touched)" 
-          [class.has-error]="!iptAddress.valid && (iptAddress.dirty || iptAddress.touched)">
-            <label class="control-label sr-only" for="inputSuccess"><i class="fa fa-check"></i> Endereço</label>
-            <input type="text" class="form-control" name="andress" ngModel #iptAddress="ngModel" required minlength="5" id="inputSuccess"
-              placeholder="Endereço">
-              <span class="help-block" *ngIf="iptAddress.valid && (iptAddress.dirty || iptAddress.touched)"><i class="fa fa-check"></i> Ok</span>
-              <span class="help-block" *ngIf="!iptAddress.valid && (iptAddress.dirty || iptAddress.touched)"><i class="fa fa-remove"></i> Campo Obrigatório</span>
-          </div>
+          <mt-input-content errorMessage="Campo obrigatório e minimo 5 caracters">
+            <input 
+              ngModel 
+              required 
+              name="ipAddress" 
+              class="form-control" 
+              minlength="5" 
+              placeholder="Endereço" 
+              autocomplete="off">
+          </mt-input-content>
         </div>
         <div class="col-sm-2 col-xs-6">
-          <div class="form-group" 
-              [class.has-success]="iptNumber.valid && (iptNumber.dirty || iptNumber.touched)" 
-              [class.has-error]="!iptNumber.valid && (iptNumber.dirty || iptNumber.touched)">
-            <label class="control-label sr-only" for="inputSuccess"><i class="fa fa-check"></i> Número</label>
-            <input type="text" class="form-control" name="number" ngModel #iptNumber="ngModel" required id="inputSuccess"
-              placeholder="Número">
-            <span class="help-block" *ngIf="iptNumber.valid && (iptNumber.dirty || iptNumber.touched)"><i class="fa fa-check"></i> Ok</span>
-            <span class="help-block" *ngIf="!iptNumber.valid && (iptNumber.dirty || iptNumber.touched)"><i class="fa fa-remove"></i> Campo Obrigatório</span>
-          </div>
+          <mt-input-content errorMessage="Campo Obrigatório">
+            <input type="text" class="form-control" name="number" ngModel required placeholder="Número">
+          </mt-input-content>
         </div>
+
         <div class="col-sm-4 col-xs-6">
-          <div class="form-group">
-            <label class="control-label sr-only" for="inputSuccess"><i class="fa fa-check"></i> Complemento</label>
+          <mt-input-content>
             <input type="text" class="form-control" name="complement" ngModel id="inputSuccess"
               placeholder="Complemento">
-          </div>
-
+          </mt-input-content>
         </div>
         <!-- /.col -->
       </div>
