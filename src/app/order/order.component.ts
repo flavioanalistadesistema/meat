@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RadioOption } from '../shared/radio/radio-option.model';
+import { RadioOption } from 'app/shared/radio/radio-option.model';
 
 @Component({
   selector: 'mt-order',
@@ -7,13 +7,12 @@ import { RadioOption } from '../shared/radio/radio-option.model';
 })
 export class OrderComponent implements OnInit {
 
-  
-  paymentoptions: RadioOption[] = [
-    { label: 'Dinheiro', value: 'MON' },
-    { label: 'Cartão de Crédito', value: 'CART' },
-    { label: 'Débito', value: 'DEB' }
-  ]
-  
+  paymentOptions: RadioOption[] = [
+    { label: 'Dinheiro', value: 'MORN' },
+    { label: 'Cartão de Crédito', value: 'CRED' },
+    { label: 'Cartão de Débito', value: 'DEB' },
+    { label: 'Vale Refeição', value: 'VR'}
+  ]  
   constructor() { }
 
   ngOnInit() {
