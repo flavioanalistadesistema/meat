@@ -24,7 +24,7 @@
             <input 
               ngModel 
               required 
-              name="ipAddress" 
+              name="address" 
               class="form-control" 
               minlength="5" 
               placeholder="Endereço" 
@@ -45,7 +45,12 @@
 
         <div class="col-sm-3 col-xs-6">
           <mt-input-content>
-            <input type="text" class="form-control" name="complement" ngModel id="inputSuccess"
+            <input 
+              type="text" 
+              class="form-control" 
+              name="optionAddress" 
+              ngModel 
+              id="inputSuccess"
               placeholder="Complemento">
           </mt-input-content>
         </div>
@@ -74,8 +79,12 @@
           <p class="lead">Formas de Pagamento:</p>
 
           <div class="form-group">
-            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
-
+            <mt-radio 
+            [options]="paymentOptions" 
+            name="paymentOption" 
+            ngModel 
+            required
+            ></mt-radio>
           </div>
 
         </div>
@@ -95,7 +104,11 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0"  ><i class="fa fa-credit-card"></i> 
+        <button 
+        (click)="checkout(form.value)"
+          class="btn btn-success pull-right" 
+          [disabled]="!form.valid || cartItems().length === 0"  
+          ><i class="fa fa-credit-card"></i> 
           Concluir Pedido
         </button>
       </div>
