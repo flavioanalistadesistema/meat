@@ -18,10 +18,7 @@ import { ShoppingCartComponent } from './restaurant-datail/shopping-cart/shoppin
 import { MenuItemComponent } from './restaurant-datail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-datail/reviews/reviews.component'
 import { ShoppingCartService } from './restaurant-datail/shopping-cart/shopping-cart.service';
-import { OrderComponent } from './order/order.component';
-import { OrderItensComponent } from './order/order-itens/order-itens.component';
 import { OrderService } from './order/order.service';
-import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -38,9 +35,6 @@ import { SharedModule } from './shared/shared.module';
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    OrderComponent,
-    OrderItensComponent,
-    DeliveryCostsComponent,
     OrderSummaryComponent
   ],
   imports: [
