@@ -1,7 +1,12 @@
 import { Component, ComponentFactoryResolver, OnInit } from "@angular/core";
 import { CartItem } from "app/restaurant-datail/shopping-cart/sopping-cart.model";
 import { RadioOption } from "app/shared/radio/radio-option.model";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from "@angular/forms";
 
 import { OrderService } from "./order.service";
 import { Order, OrderItem } from "./order.model";
@@ -16,8 +21,10 @@ export class OrderComponent implements OnInit {
   delivery: number = 10;
   orderForm: FormGroup;
 
-  emailPather = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  numberPattern = /^[0-9]*$/
+  errorMessage = " E-mails devem ser iguais";
+
+  emailPather = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  numberPattern = /^[0-9]*$/;
 
   paymentOptions: RadioOption[] = [
     { label: "Dinheiro", value: "MORN" },
@@ -32,15 +39,48 @@ export class OrderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.orderForm = this.formBuilder.group({
-      name:           this.formBuilder.control("", [Validators.required, Validators.minLength(5)]),
-      email:          this.formBuilder.control("", [Validators.required, Validators.pattern(this.emailPather)]),
-      confirmEmail:   this.formBuilder.control("", [Validators.required, Validators.pattern(this.emailPather)]),
-      address:        this.formBuilder.control("", [Validators.required, Validators.minLength(5)]),
-      number:         this.formBuilder.control("", [Validators.required, Validators.pattern(this.numberPattern)]),
-      optionAddress:  this.formBuilder.control(""),
-      paymentOption:  this.formBuilder.control("", [Validators.required])
-    });
+    this.orderForm = this.formBuilder.group(
+      {
+        name: this.formBuilder.control("", [
+          Validators.required,
+          Validators.minLength(5),
+        ]),
+        email: this.formBuilder.control("", [
+          Validators.required,
+          Validators.pattern(this.emailPather),
+        ]),
+        confirmEmail: this.formBuilder.control("", [
+          Validators.required,
+          Validators.pattern(this.emailPather),
+        ]),
+        address: this.formBuilder.control("", [
+          Validators.required,
+          Validators.minLength(5),
+        ]),
+        number: this.formBuilder.control("", [
+          Validators.required,
+          Validators.pattern(this.numberPattern),
+        ]),
+        optionAddress: this.formBuilder.control(""),
+        paymentOption: this.formBuilder.control("", [Validators.required]),
+      },
+      { validator: OrderComponent.qualsTo }
+    );
+  }
+
+  static qualsTo(group: AbstractControl): { [key: string]: boolean } {
+    const email = group.get("email");
+    const confirmEmail = group.get("confirmEmail");
+
+    if (!email || !confirmEmail) {
+      return undefined;
+    }
+
+    if (email.value != confirmEmail.value) {
+      return { emailCheck: true };
+    }
+
+    return undefined;
   }
 
   itemsValue(): number {

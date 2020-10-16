@@ -14,8 +14,11 @@
       </div>
       
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-9">
           <p class="lead">Seus dados:</p>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <span class="help-box pull-right has-error-block" *ngIf="orderForm.hasError('emailCheck')"><i class="fa fa-remove">{{errorMessage}}</i></span>
         </div>
         <div class="col-sm-6 col-xs-12">
           <mt-input-content errorMessage="Digite no minimo duas palavras">
