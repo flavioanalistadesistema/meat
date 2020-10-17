@@ -16,7 +16,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         opacity:1
       })),
       transition('hidden => visible', animate('500ms 0s ease-in')),
-      transition('visible => hidden', animate('500ms 0 s ease-out'))
+      transition('visible => hidden', animate('500ms 0s ease-out'))
     ])
   ]
 })
@@ -28,6 +28,10 @@ export class SnackbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  visibleMessage() {
+    this.snackVisibility = this.snackVisibility === 'hidden' ? 'visible' : 'hidden';
   }
 
 }
