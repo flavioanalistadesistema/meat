@@ -9,6 +9,7 @@ export class InputComponent implements OnInit, AfterContentInit {
 
   @Input() label: string
   @Input() errorMessage: string
+  @Input() showInput: boolean = true
 
   input: any
   @ContentChild(NgModel) model: NgModel
