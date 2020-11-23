@@ -12,6 +12,7 @@ import { RestaurantsService } from 'app/restaurants/restaurants.service';
 import { ShoppingCartService } from 'app/restaurant-datail/shopping-cart/shopping-cart.service';
 import { SnackbarComponent } from './mensages/snackbar/snackbar.component';
 import { NotificationService } from './mensages/notification.service';
+import { LoginService } from 'app/security/login/login.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { NotificationService } from './mensages/notification.service';
 
 
 
-export class SharedModule { 
+export class SharedModule {
 
     static forRoot(): ModuleWithProviders {
         return {
@@ -39,7 +40,8 @@ export class SharedModule {
                 OrderService,
                 RestaurantsService,
                 ShoppingCartService,
-                NotificationService
+                NotificationService,
+                LoginService
             ]
         }
     }
