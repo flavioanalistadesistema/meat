@@ -4,10 +4,11 @@ class Order {
         public number: number,
         public optionAddress: string,
         public paymentOption: string,
-        public orderItems: OrderItem[] = []
+        public orderItems: OrderItem[] = [],
+        public id: string
     ){}
 }
-    
+
 class OrderItem {
     constructor(
         public quantity: number,

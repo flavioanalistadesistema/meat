@@ -7,12 +7,12 @@ import { CartItem } from 'app/restaurant-datail/shopping-cart/sopping-cart.model
 })
 export class OrderItensComponent implements OnInit {
 
-  @Input() items: CartItem
+  @Input() items: CartItem[]
   @Output() increaseQty = new EventEmitter<CartItem>()
   @Output() decreaseQty = new EventEmitter<CartItem>()
   @Output() remove = new EventEmitter<CartItem>()
-  
-  value: any 
+
+  value: any
 
   constructor() { }
 
