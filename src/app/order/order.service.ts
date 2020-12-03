@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core'
 import { ShoppingCartService } from "app/restaurant-datail/shopping-cart/shopping-cart.service";
 import { CartItem } from "app/restaurant-datail/shopping-cart/sopping-cart.model";
 
-import { Order, OrderItem } from "./order.model";
+import { Order} from "./order.model";
 import { MEAT_API } from "../app.api"
+import { LoginService } from "../security/login/login.service"
 
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable } from "rxjs/Observable"
 import "rxjs/add/operator/map"
 
@@ -14,7 +15,8 @@ export class OrderService {
 
     constructor(
         private cartService: ShoppingCartService,
-        private http: HttpClient
+        private http: HttpClient,
+        private loginService: LoginService
     ) { }
 
     items(): CartItem[] {
@@ -38,10 +40,13 @@ export class OrderService {
     }
 
     checkout(order: Order): Observable<string>{
-        const headers = new Headers()
-        headers.append('Content-Type', 'application/json')
+        let headers = new HttpHeaders()
+        if (this.loginService.isLoggedIn()) {
+          headers = headers.set('Authorization', `Bearer ${this.loginService.user.accesToken}`)
+          console.log('headers', headers)
+        }
 
-        return this.http.post<Order>(`${MEAT_API}/orders`,order)
+        return this.http.post<Order>(`${MEAT_API}/orders`,order, {headers: headers})
             .map(order => order.id)
     }
 }

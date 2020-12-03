@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { LoginService } from './login.service'
+import { NotificationService } from '../../shared/mensages/notification.service'
 
 @Component({
   selector: 'mt-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(
       this.loginForm.value.email,
       this.loginForm.value.password )
-      .subscribe(resp => console.log(resp))
+      .subscribe(
+        user => this.notificationService.notificate(`Bem vindo(a) ${user.name}`),
+        respError => this.notificationService.notificate(respError.error.mensage))
   }
 }
