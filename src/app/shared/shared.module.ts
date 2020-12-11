@@ -13,6 +13,7 @@ import { ShoppingCartService } from 'app/restaurant-datail/shopping-cart/shoppin
 import { SnackbarComponent } from './mensages/snackbar/snackbar.component';
 import { NotificationService } from './mensages/notification.service';
 import { LoginService } from 'app/security/login/login.service';
+import { LoggedInGuard } from 'app/security/loggedin.guard';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ export class SharedModule {
                 RestaurantsService,
                 ShoppingCartService,
                 NotificationService,
-                LoginService
+                LoginService,
+                LoggedInGuard
             ]
         }
     }
