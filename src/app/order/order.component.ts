@@ -10,8 +10,9 @@ import {
 
 import { OrderService } from "./order.service";
 import { Order, OrderItem } from "./order.model";
-
 import { Router } from "@angular/router";
+
+import 'rxjs/add/operator/do'
 
 @Component({
   selector: "mt-order",
@@ -20,6 +21,7 @@ import { Router } from "@angular/router";
 export class OrderComponent implements OnInit {
   delivery: number = 10;
   orderForm: FormGroup;
+  orderId: string
 
   errorMessage = " E-mails devem ser iguais";
 
@@ -108,10 +110,14 @@ export class OrderComponent implements OnInit {
       (item: CartItem) => new OrderItem(item.quantity, item.menuItem.id)
     );
 
-    this.orderService.checkout(order).subscribe((order: string) => {
+    this.orderService.checkout(order)
+      .do(orderId=> this.orderId = orderId)
+      .subscribe((order: string) => {
       this.router.navigate(["/order-summary"]);
     });
+  }
 
-    console.log("order", order);
+  isOrderComplet(){
+    return false
   }
 }
