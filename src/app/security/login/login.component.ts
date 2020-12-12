@@ -12,7 +12,6 @@ import { NotificationService } from '../../shared/mensages/notification.service'
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
-
   navegateTo: string
 
   constructor(
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', [Validators.required])
     })
-    this.navegateTo = this.activatedRoute.snapshot.params['to'] || '/'
+    this.navegateTo = this.activatedRoute.snapshot.params['to'] || btoa('/')
   }
 
   login(){
@@ -38,6 +37,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         user => this.notificationService.notificate(`Bem vindo(a) ${user.name}`),
         respError => this.notificationService.notificate(respError.error.mensage),
-        ()=> this.router.navigate([this.navegateTo]))
+        ()=> this.router.navigate([atob(this.navegateTo)]))
   }
 }
