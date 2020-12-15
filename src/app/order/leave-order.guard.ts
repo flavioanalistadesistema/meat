@@ -7,8 +7,7 @@ export class LeaveOrderGuard implements CanDeactivate<OrderComponent> {
     orderComponent: OrderComponent,
     activatedRouter: ActivatedRouteSnapshot,
     routerState: RouterStateSnapshot): boolean {
-    if (!orderComponent.isOrderComplet()
-    ) {
+    if (!orderComponent.isOrderComplet()) {
       return window.confirm('Você não deseja continuar mais com suas compras?')
     } else {
       return true

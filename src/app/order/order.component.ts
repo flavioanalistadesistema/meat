@@ -105,19 +105,18 @@ export class OrderComponent implements OnInit {
     this.orderService.removeItem(item);
   }
 
+  isOrderComplet(){
+    return this.orderId != undefined
+  }
+
   checkout(order: Order): void {
     order.orderItems = this.cartItems().map(
       (item: CartItem) => new OrderItem(item.quantity, item.menuItem.id)
     );
 
-    this.orderService.checkout(order)
-      .do(orderId=> this.orderId = orderId)
+    this.orderService.checkout(order).do(order => {this.orderId = order})
       .subscribe((order: string) => {
       this.router.navigate(["/order-summary"]);
     });
-  }
-
-  isOrderComplet(){
-    return false
   }
 }
