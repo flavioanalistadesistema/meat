@@ -40,13 +40,7 @@ export class OrderService {
     }
 
     checkout(order: Order): Observable<string>{
-        let headers = new HttpHeaders()
-        if (this.loginService.isLoggedIn()) {
-          headers = headers.set('Authorization', `Bearer ${this.loginService.user.accesToken}`)
-          console.log('headers', headers)
-        }
-
-        return this.http.post<Order>(`${MEAT_API}/orders`,order, {headers: headers})
+        return this.http.post<Order>(`${MEAT_API}/orders`,order)
             .map(order => order.id)
     }
 }
