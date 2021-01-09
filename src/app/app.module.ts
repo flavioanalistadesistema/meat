@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 
@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './security/login/login.component';
 import { UserDatailComponent } from './header/user-datail/user-datail.component'
+import { AplicationErrorHandler } from './app.error-handler'
 
 @NgModule({
   declarations: [
@@ -44,9 +45,12 @@ import { UserDatailComponent } from './header/user-datail/user-datail.component'
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule.forRoot(),
-    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: ErrorHandler, useClass: AplicationErrorHandler }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

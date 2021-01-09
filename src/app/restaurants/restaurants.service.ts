@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { MEAT_API } from "../app.api";
 import { Observable } from "rxjs/Observable";
 import { Injectable } from "@angular/core";
-import { ErrorHandler } from "../app.error-handler";
 import { MenuItem } from "app/restaurant-datail/menu-item/menu-item.model";
 
 import "rxjs/add/operator/map";
@@ -18,7 +17,7 @@ export class RestaurantsService {
     if (search) {
       params = new HttpParams().append('q', search)
     }
-    return this.http.get<Restaurant[]>(`${MEAT_API}/restaurants`, {params})
+    return this.http.get<Restaurant[]>(`${MEAT_API}/restaurantss`, {params})
   }
 
   restaurantById(id: string): Observable<Restaurant> {
